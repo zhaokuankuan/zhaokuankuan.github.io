@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>springboot项目的搭建和基本的用法 | 奋斗的小鸟</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="初涉springboot，学习小记，用于学习，简单介绍下如何去创建一个简单的的springboot工程。本人这里使用idea操作的。一.首先需要创建一个工程：new project,选择Spring Initalizr。输入项目的目录结构和项目的名称，如图：然后选择你需要导入的jar包，如下：web是web项目的核心启动包，devtools是一个web项目的工具包。 二.然后你的一个springb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot项目的搭建和基本的用法">
+<meta property="og:url" content="http://yoursite.com/2018/07/03/springboot项目的搭建和基本的用法/index.html">
+<meta property="og:site_name" content="奋斗的小鸟">
+<meta property="og:description" content="初涉springboot，学习小记，用于学习，简单介绍下如何去创建一个简单的的springboot工程。本人这里使用idea操作的。一.首先需要创建一个工程：new project,选择Spring Initalizr。输入项目的目录结构和项目的名称，如图：然后选择你需要导入的jar包，如下：web是web项目的核心启动包，devtools是一个web项目的工具包。 二.然后你的一个springb">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509172029526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509172333830?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509172423241?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509172740232?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509173207746?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-07-03T04:13:38.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springboot项目的搭建和基本的用法">
+<meta name="twitter:description" content="初涉springboot，学习小记，用于学习，简单介绍下如何去创建一个简单的的springboot工程。本人这里使用idea操作的。一.首先需要创建一个工程：new project,选择Spring Initalizr。输入项目的目录结构和项目的名称，如图：然后选择你需要导入的jar包，如下：web是web项目的核心启动包，devtools是一个web项目的工具包。 二.然后你的一个springb">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180509172029526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">奋斗的小鸟</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-springboot项目的搭建和基本的用法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/03/springboot项目的搭建和基本的用法/" class="article-date">
+  <time class="post-time" datetime="2018-07-03T04:11:36.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      springboot项目的搭建和基本的用法
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>初涉springboot，学习小记，用于学习，简单介绍下如何去创建一个简单的的springboot工程。本人这里使用idea操作的。<br><strong>一.首先需要创建一个工程：new project,选择Spring Initalizr。</strong><br><img src="https://img-blog.csdn.net/20180509172029526?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>输入项目的目录结构和项目的名称，如图：<br><img src="https://img-blog.csdn.net/20180509172333830?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>然后选择你需要导入的jar包，如下：<br><img src="https://img-blog.csdn.net/20180509172423241?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>web是web项目的核心启动包，devtools是一个web项目的工具包。</p>
+<p><strong>二.然后你的一个springboot项目便创建完成。</strong><br>如图我们可以创建这个项目的目录结构，但是需要注意一点的是，包的结构必须和TestApplication是在一级上。<br> <img src="https://img-blog.csdn.net/20180509172740232?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>在controller里面创建一个类，HelloController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class HelloController &#123;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/hello&quot;)</span><br><span class="line">    public  String sayHello()&#123;</span><br><span class="line">        return  &quot;Hello , my First demo!&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>然后我们启动这个工程，然后访问一下！</strong><br><img src="https://img-blog.csdn.net/20180509173207746?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>如上图所示我们的项目就已经构建完成了，然后具体的项目的热部署和项目的过滤器和测试等都在我下面的笔记中有，也可以看我的github，查看我的代码！</p>
+<p><strong>笔记</strong>：</p>
+<blockquote>
+<p><strong>1.springboot的创建：</strong>     idea的情况下，选择Spring Initializr 然后配置 web 和 devtools 一个是启动的web的核心依赖一个是开发工具包<br><strong>2.创建热部署</strong>     idea下，pom中修改 devtools的optional为true 则为热部署开启     plugin 下增加configuration –》fork 为true     接下来在build<br>里面选择自动构建；ctrl+shift+a：输入register<br>窜则compile.automake.allow.when.app.running<br><strong>3.单元测试</strong>     先创建mockmvc，静态的加载：ockMvcBuilders.standaloneSetup(new HelloWorldController()).build();<br>    mockmvc.perform()调用mockmvcRequestBuilders.post/get方法，.parm()加参数–》键值对类型,anddo（print()）可以打印<br><strong>4json的支持</strong>     在 Spring Boot 体系中，天然对 Json 支持，@restController<br><strong>5.请求传参</strong>     例如@RequestMapping(value=”get/{name}”, method=RequestMethod.GET)     public User get(@PathVariable String name)<br>{         this.name = name;     }<br><strong>6.参数校验</strong>     实体类上可以加@NotEmpty，@Max，@Min，@Length来设置属性的校验     Spring Boot 的参数校验其实是依赖于 hibernate-validator 来进行     public void saveUser(@Valid User<br>user,BindingResult result){         List<objecterror> list =<br>result.getAllErrors(); //能够得到所有的校验的结果     }<br><strong>7.自定义过滤</strong>     自定义的过滤必须实现Filter接口并实现方法，在doFilter里面写上自己的过滤处理     @Configuration说明是个配置类，用来存放配置信息，     @bean 说明该方法作为一个配置信息被spring监控，<br>    public FilterRegistrationBean testFilterRegistration() {<br>       FilterRegistrationBean registration = new FilterRegistrationBean();<br>       registration.setFilter(new MyFilter());<br>       registration.addUrlPatterns(“/*”);<br>       registration.addInitParameter(“paramName”, “paramValue”);<br>       registration.setName(“MyFilter”);<br>       registration.setOrder(1);<br>       return registration;<br>    }</objecterror></p>
+</blockquote>
+<p><a href="https://github.com/zhaokuankuan/springboot-basic" target="_blank" rel="noopener">代码地址</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/03/springboot项目的搭建和基本的用法/" data-id="cjj77is4m000598e7n7y5zic0" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Springcloud微服务架构之服务的注册和发现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">奋斗的小鸟</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">奋斗的小鸟</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/zhaokuankuan" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://blog.csdn.net/zhaokk_git" target="_blank" title="blog">
+          blog
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.csdn.net/zhaokk_git" target="_blank" title="csdn">
+          csdn
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 奋斗的小鸟<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

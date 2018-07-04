@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpringCloud微服务架构之服务的调用 | 奋斗的小鸟</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。接下来分别对这两种的进行讲解。服务的调用还是在上一节服务的注册和发现的基础上进行的。一．    准备工作，服务的调用基于上一节，服务的注册和发现进行的，因此我们需要先启动上一节的服务注册中心，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud微服务架构之服务的调用">
+<meta property="og:url" content="http://yoursite.com/2018/07/03/SpringCloud微服务架构之服务的调用/index.html">
+<meta property="og:site_name" content="奋斗的小鸟">
+<meta property="og:description" content="微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。接下来分别对这两种的进行讲解。服务的调用还是在上一节服务的注册和发现的基础上进行的。一．    准备工作，服务的调用基于上一节，服务的注册和发现进行的，因此我们需要先启动上一节的服务注册中心，然">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509170634707?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509170646527?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509170728714?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509170739928?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180509170752523?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-07-03T04:12:31.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringCloud微服务架构之服务的调用">
+<meta name="twitter:description" content="微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。接下来分别对这两种的进行讲解。服务的调用还是在上一节服务的注册和发现的基础上进行的。一．    准备工作，服务的调用基于上一节，服务的注册和发现进行的，因此我们需要先启动上一节的服务注册中心，然">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180509170634707?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">奋斗的小鸟</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-SpringCloud微服务架构之服务的调用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/03/SpringCloud微服务架构之服务的调用/" class="article-date">
+  <time class="post-time" datetime="2018-07-03T04:10:50.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringCloud微服务架构之服务的调用
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>微服务架构中，业务都会被拆分成一个独立的服务，服务与服务的通讯是基于http restful的。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。接下来分别对这两种的进行讲解。服务的调用还是在上一节<a href="https://blog.csdn.net/zhaokk_git/article/details/80228880" target="_blank" rel="noopener">服务的注册和发现</a>的基础上进行的。</strong><br>一．    <strong>准备工作，</strong>服务的调用基于上一节，服务的注册和发现进行的，因此我们需要先启动上一节的服务注册中心，然后再启动我们需要注册的服务service-hi,然后修改service 的端口号重新启动，访问<strong><a href="http://localhost:8761/" target="_blank" rel="noopener">http://localhost:8761/</a></strong>，你会看到如下图则表示我们的准备工作已经完成了。<br> <img src="https://img-blog.csdn.net/20180509170634707?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>二．    <strong>创建一个基于Ribbon+restTemplate的服务消费者：ribbon是一个负载均衡客户端，可以很好的控制htt和tcp的一些行为。</strong></p>
+<ol>
+<li><p>新建一个module，分别引入如下的包，然后finish</p>
+<p><img src="https://img-blog.csdn.net/20180509170646527?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>2.新建好了之后，RibbonApplication中增加注解@bean 将RestTemplate注入到容器中去，</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class RibbonApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(RibbonApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Bean</span><br><span class="line">   @LoadBalanced</span><br><span class="line">   public RestTemplate restTemplate()&#123;</span><br><span class="line">      return  new RestTemplate();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3，然后创建一个service类和一个controller类，如图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class service &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    public  String  sayHello(String name)&#123;</span><br><span class="line">        return  this.restTemplate.getForObject(&quot;http://service-hi/hi?name=&quot; + name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Service中需要注入的是resttemplate接口,并且可以去访问对应的服务和服务的接口。<br>在创建一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class controller &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private service service;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/hello&quot;,method = &#123;RequestMethod.GET,RequestMethod.POST&#125;)</span><br><span class="line">    public String sayHello(String name)&#123;</span><br><span class="line">        return  service.sayHello(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4，接下来我们需要修改下我们前一节所写的服务，如图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableDiscoveryClient</span><br><span class="line">@RestController</span><br><span class="line">public class ServiceApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(ServiceApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   @Value(&quot;$&#123;server.port&#125;&quot;)</span><br><span class="line">   String port;</span><br><span class="line"></span><br><span class="line">   @RequestMapping(value = &quot;/hi&quot;,method = &#123;RequestMethod.GET,RequestMethod.POST&#125;)</span><br><span class="line">   public String sayHello(String name)&#123;</span><br><span class="line">      return &quot;I am service-hi ,my port is :&quot; + port + &quot;my name is &quot; + name;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5，然后一次重启所有的服务：serverservice1service2Ribbon,然后访问<strong><a href="http://localhost:8080/hello?name=kk" target="_blank" rel="noopener">http://localhost:8080/hello?name=kk</a></strong>,你会发现界面上会重复交替出现两个服务service1和service2的端口号和传递过去的参数。<br><img src="https://img-blog.csdn.net/20180509170728714?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>到此Ribbon和restTemplate的消费服务已经完成，接下来我们看看Feign的服务。<br>三．    <strong>创建一个基于Feign去消费服务</strong>：<br>Feign 采用的是基于接口的注解<br>Feign 整合了ribbon<br>1.同理我们也是需要在一的步骤下进行的，必须先开启服务注册中心，并且将我们的服务注册进去，然后新建一个Feign，如图：<br><img src="https://img-blog.csdn.net/20180509170739928?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>然后需要创建一个Iservice接口和FeignController类:<br>创建该接口用来调用服务@FeignClient(value = “service-hi”) 注解配置的是服务的名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/hi&quot;) //配置的调用的接口</span><br><span class="line">@FeignClient(value = &quot;service-hi&quot;)</span><br><span class="line">@Service</span><br><span class="line">public interface Iservice &#123;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(&quot;/hi&quot;)</span><br><span class="line">     String SayHello(@RequestParam(value = &quot;name&quot;) String name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class FeignController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private Iservice iservice;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = &quot;/feign/hello&quot;)</span><br><span class="line">    public String sayHello(String name)&#123;</span><br><span class="line">        return   iservice.SayHello(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>配置下该启动类，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableFeignClients</span><br><span class="line">public class FeignApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(FeignApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后访问：<strong><a href="http://localhost:8080/feign/hello?name=kk" target="_blank" rel="noopener">http://localhost:8080/feign/hello?name=kk</a></strong><br>你会看到如下的界面：<br><img src="https://img-blog.csdn.net/20180509170752523?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p><strong>以上就是服务的消费的两种方式。</strong> </p>
+<p>附上我的完整的博文：<br><strong><a href="https://blog.csdn.net/zhaokk_git/article/details/80228420" target="_blank" rel="noopener">从零开始学习SpringCloud</a></strong><br><strong><a href="https://github.com/zhaokuankuan/springcloud/tree/master/springcloud" target="_blank" rel="noopener">代码地址</a></strong><br><strong>在此感谢，两位大佬的博客，我是根据以上大佬的博客学习的！</strong><br><a href="https://blog.csdn.net/forezp/article/details/70148833" target="_blank" rel="noopener">方志鹏的springcloud微服务架构</a><br><a href="http://www.ityouknow.com/spring-cloud.html" target="_blank" rel="noopener">纯洁的微笑</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/03/SpringCloud微服务架构之服务的调用/" data-id="cjj77is45000098e74osa2gpd" class="article-share-link">分享</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Springcloud微服务架构之服务的注册和发现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/03/Springcloud微服务架构之断路器-Hystrix/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Springcloud微服务架构之断路器(Hystrix)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">奋斗的小鸟</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://avatars0.githubusercontent.com/u/20333903?v=3&amp;s=460">
+    <h2 class="author">奋斗的小鸟</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/zhaokuankuan" target="_blank" title="Github">
+          Github
+        </a>
+      
+        <a class="hvr-bounce-in" href="http://blog.csdn.net/zhaokk_git" target="_blank" title="blog">
+          blog
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.csdn.net/zhaokk_git" target="_blank" title="csdn">
+          csdn
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 奋斗的小鸟<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

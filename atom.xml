@@ -102,27 +102,6 @@
   
   <entry>
     <title>从零开始学习SpringCloud</title>
-    <link href="http://yoursite.com/2018/07/03/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0SpringCloud/"/>
-    <id>http://yoursite.com/2018/07/03/从零开始学习SpringCloud/</id>
-    <published>2018-07-03T04:08:24.000Z</published>
-    <updated>2018-07-03T04:08:39.549Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>&#160; &#160; &#160;前段时间把SpringBoot刷了一遍，感觉是时候深入研究一下微服务架构了，在网上看到了方志鹏的书，觉得不错便关注了他的博客，由于前期一直关注微笑并且跟着微笑的达人课完成了SpringBoot的入门，因此在此感谢两位大佬，令附上两位大佬的博客地址。</strong> ==》<strong><a href="https://blog.csdn.net/zhaokk_git/article/details/79608197" target="_blank" rel="noopener">springboot的入门</a></strong><br>  &#160; &#160; &#160;我将springcloud处理微服务架构分为下面的模块进行慢慢的蚕食：<br>  &#160; &#160; &#160;1. <a href="https://blog.csdn.net/zhaokk_git/article/details/80228880" target="_blank" rel="noopener">服务的注册和发现</a><br>  &#160; &#160; &#160;2.  <a href="https://blog.csdn.net/zhaokk_git/article/details/80267799" target="_blank" rel="noopener">断路器</a><br> &#160; &#160; &#160;3. <a href="https://blog.csdn.net/zhaokk_git/article/details/80256356" target="_blank" rel="noopener">服务调用</a><br>&#160; &#160; &#160;4. <a href="https://blog.csdn.net/zhaokk_git/article/details/80435355" target="_blank" rel="noopener">路由网关</a><br> &#160; &#160; &#160;5. 分布式配置中心<br> &#160; &#160; &#160;6. 消息总线<br> &#160; &#160; &#160;7. 服务链路追踪<br> &#160; &#160; &#160;<br>  <strong>&#160; &#160; &#160;未完待续中。。。</strong></p><p>  &#160; &#160; &#160;附上我的github地址，<a href="https://github.com/zhaokuankuan/springcloud" target="_blank" rel="noopener">从零开始学习springcloud</a><br> <strong>以下是我自己对上述模块的认识和分析：</strong></p><blockquote><p> &#160; &#160; &#160;1. 在服务的注册和发现和调用之间有三个模块： 注册中心,服务提供者，服务消费者  &#160;<br>&#160; &#160;2. 启动的时候先启动注册中心==》提供者==》消费者  &#160; &#160;<br>&#160;3.可以对注册中心进行负载均衡也可以对服务的调用进行负载均衡对注册中心：通过修改 <code>defaultZone:http://localhost:8761/eureka/，http://localhost:8762/eureka/，http://localhost:8763/eureka/</code>来实现<br>&#160; &#160; &#160;对服务的调用： ribbon + resttmplate 是客户端的一种负载均衡的方式<br>&#160; &#160; &#160;feign :原理也是基于ribbon实现的。只需要创建一个接口并注解。它具有可插拔的注解特<br>性，可使用Feign<br>注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。<br>&#160; &#160; &#160;4.<br>断路器：为了保证服务的高可用，引入了断路器的概念，当访问一个服务的不可用得到了一定的阈值时，断路器将会被打开<br>    &#160; &#160; &#160;两种实现：<br>         &#160; &#160; &#160;   (1).restTemplate 和 ribbon 方式，需要在调用的服务上增加熔断的方法即可<br>      &#160; &#160; &#160;      (2).feign，需要在接口的FeignClient注解中增加callback方法即可，指向该接口的实现类，该实现类中重写的方法即出现断路时调用的方法。<br>&#160; &#160; &#160;5.路由网关<br>(zuul)：主要做的是路由的转发和过滤，zuul默认和Ribbon结合实现了负载均衡的功能。<br>      &#160; &#160; &#160;      (1).路由的转发，类似于nigix反向代理，将对应的路径代理到对应的服务器上去<br>         &#160; &#160; &#160;   (2).路由的过滤，通过自定义过滤器，然后继承zuulfilter来自定义过滤的类型和优先级和逻辑等 &#160; &#160;<br>&#160;6.分布式配置中心(Configure)：在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所以需要分布式配置中心组件<br>          &#160; &#160; &#160;  分为两个角色：分别是配置的服务器和配置的客户端<br>            &#160; &#160; &#160;延伸到微服务可以将配置中心做成一个微服务，并且将其集群 &#160; &#160;<br>&#160;7.消息总线(Bus)：消息总线将分布式的节点用轻量的消息代理连接起来，它可以用于广播配置文件的更改或者服务之间的通讯，也可以用于监控<br>                &#160; &#160; &#160;主要是rabbitmq的用法 &#160; &#160; &#160;8.服务链路追踪(Sleuth):在分布式系统中提供追踪解决方案<br>            &#160; &#160; &#160;  对于微服务架构，启动的时候会启动一个Trace，一系列spans组成的一个树状结构<br>             &#160; &#160; &#160;  在访问的时候会跟随目前访问的位置和所用的时间，可以快速的反应和查找问题<br>               &#160; &#160; &#160;  ZipkinServer ==》用来收集调用信息 &#160; &#160; &#160; 9.docker部署springcloud项目 &#160; &#160;<br>&#160;10.服务注册(consul):它是一个提供服务发现和配置的工具,consul具有分布式、高可用、高扩展性。</p></blockquote><p><strong>以上学习资源来自：</strong><br><a href="https://blog.csdn.net/forezp/article/details/70148833" target="_blank" rel="noopener">方志鹏的springcloud微服务架构</a><br><a href="http://www.ityouknow.com/spring-cloud.html" target="_blank" rel="noopener">纯洁的微笑</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;&amp;#160; &amp;#160; &amp;#160;前段时间把SpringBoot刷了一遍，感觉是时候深入研究一下微服务架构了，在网上看到了方志鹏的书，觉得不错便关注了他的博客，由于前期一直关注微笑并且跟着微笑的达人课完成了SpringBoot的入门，因此在此感谢两位大
-      
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>从零开始学习SpringCloud</title>
     <link href="http://yoursite.com/2018/07/03/Springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B9%8B%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3(zuul)/"/>
     <id>http://yoursite.com/2018/07/03/Springcloud微服务架构之路由网关(zuul)/</id>
     <published>2018-07-03T04:08:24.000Z</published>
@@ -136,6 +115,27 @@
       
         &lt;p&gt;&lt;strong&gt;Springcloud微服务架构之路由网关(zuul)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Zuul的主要功能是路由转发和过滤器:&lt;/strong&gt;&lt;br&gt;    &lt;strong&gt;1.路由功能是微服务的一部分&lt;/strong&gt;，比如将 API-A
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从零开始学习SpringCloud</title>
+    <link href="http://yoursite.com/2018/07/03/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0SpringCloud/"/>
+    <id>http://yoursite.com/2018/07/03/从零开始学习SpringCloud/</id>
+    <published>2018-07-03T04:08:24.000Z</published>
+    <updated>2018-07-03T04:08:39.549Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>&#160; &#160; &#160;前段时间把SpringBoot刷了一遍，感觉是时候深入研究一下微服务架构了，在网上看到了方志鹏的书，觉得不错便关注了他的博客，由于前期一直关注微笑并且跟着微笑的达人课完成了SpringBoot的入门，因此在此感谢两位大佬，令附上两位大佬的博客地址。</strong> ==》<strong><a href="https://blog.csdn.net/zhaokk_git/article/details/79608197" target="_blank" rel="noopener">springboot的入门</a></strong><br>  &#160; &#160; &#160;我将springcloud处理微服务架构分为下面的模块进行慢慢的蚕食：<br>  &#160; &#160; &#160;1. <a href="https://blog.csdn.net/zhaokk_git/article/details/80228880" target="_blank" rel="noopener">服务的注册和发现</a><br>  &#160; &#160; &#160;2.  <a href="https://blog.csdn.net/zhaokk_git/article/details/80267799" target="_blank" rel="noopener">断路器</a><br> &#160; &#160; &#160;3. <a href="https://blog.csdn.net/zhaokk_git/article/details/80256356" target="_blank" rel="noopener">服务调用</a><br>&#160; &#160; &#160;4. <a href="https://blog.csdn.net/zhaokk_git/article/details/80435355" target="_blank" rel="noopener">路由网关</a><br> &#160; &#160; &#160;5. 分布式配置中心<br> &#160; &#160; &#160;6. 消息总线<br> &#160; &#160; &#160;7. 服务链路追踪<br> &#160; &#160; &#160;<br>  <strong>&#160; &#160; &#160;未完待续中。。。</strong></p><p>  &#160; &#160; &#160;附上我的github地址，<a href="https://github.com/zhaokuankuan/springcloud" target="_blank" rel="noopener">从零开始学习springcloud</a><br> <strong>以下是我自己对上述模块的认识和分析：</strong></p><blockquote><p> &#160; &#160; &#160;1. 在服务的注册和发现和调用之间有三个模块： 注册中心,服务提供者，服务消费者  &#160;<br>&#160; &#160;2. 启动的时候先启动注册中心==》提供者==》消费者  &#160; &#160;<br>&#160;3.可以对注册中心进行负载均衡也可以对服务的调用进行负载均衡对注册中心：通过修改 <code>defaultZone:http://localhost:8761/eureka/，http://localhost:8762/eureka/，http://localhost:8763/eureka/</code>来实现<br>&#160; &#160; &#160;对服务的调用： ribbon + resttmplate 是客户端的一种负载均衡的方式<br>&#160; &#160; &#160;feign :原理也是基于ribbon实现的。只需要创建一个接口并注解。它具有可插拔的注解特<br>性，可使用Feign<br>注解和JAX-RS注解。Feign支持可插拔的编码器和解码器。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果。<br>&#160; &#160; &#160;4.<br>断路器：为了保证服务的高可用，引入了断路器的概念，当访问一个服务的不可用得到了一定的阈值时，断路器将会被打开<br>    &#160; &#160; &#160;两种实现：<br>         &#160; &#160; &#160;   (1).restTemplate 和 ribbon 方式，需要在调用的服务上增加熔断的方法即可<br>      &#160; &#160; &#160;      (2).feign，需要在接口的FeignClient注解中增加callback方法即可，指向该接口的实现类，该实现类中重写的方法即出现断路时调用的方法。<br>&#160; &#160; &#160;5.路由网关<br>(zuul)：主要做的是路由的转发和过滤，zuul默认和Ribbon结合实现了负载均衡的功能。<br>      &#160; &#160; &#160;      (1).路由的转发，类似于nigix反向代理，将对应的路径代理到对应的服务器上去<br>         &#160; &#160; &#160;   (2).路由的过滤，通过自定义过滤器，然后继承zuulfilter来自定义过滤的类型和优先级和逻辑等 &#160; &#160;<br>&#160;6.分布式配置中心(Configure)：在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所以需要分布式配置中心组件<br>          &#160; &#160; &#160;  分为两个角色：分别是配置的服务器和配置的客户端<br>            &#160; &#160; &#160;延伸到微服务可以将配置中心做成一个微服务，并且将其集群 &#160; &#160;<br>&#160;7.消息总线(Bus)：消息总线将分布式的节点用轻量的消息代理连接起来，它可以用于广播配置文件的更改或者服务之间的通讯，也可以用于监控<br>                &#160; &#160; &#160;主要是rabbitmq的用法 &#160; &#160; &#160;8.服务链路追踪(Sleuth):在分布式系统中提供追踪解决方案<br>            &#160; &#160; &#160;  对于微服务架构，启动的时候会启动一个Trace，一系列spans组成的一个树状结构<br>             &#160; &#160; &#160;  在访问的时候会跟随目前访问的位置和所用的时间，可以快速的反应和查找问题<br>               &#160; &#160; &#160;  ZipkinServer ==》用来收集调用信息 &#160; &#160; &#160; 9.docker部署springcloud项目 &#160; &#160;<br>&#160;10.服务注册(consul):它是一个提供服务发现和配置的工具,consul具有分布式、高可用、高扩展性。</p></blockquote><p><strong>以上学习资源来自：</strong><br><a href="https://blog.csdn.net/forezp/article/details/70148833" target="_blank" rel="noopener">方志鹏的springcloud微服务架构</a><br><a href="http://www.ityouknow.com/spring-cloud.html" target="_blank" rel="noopener">纯洁的微笑</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;&amp;#160; &amp;#160; &amp;#160;前段时间把SpringBoot刷了一遍，感觉是时候深入研究一下微服务架构了，在网上看到了方志鹏的书，觉得不错便关注了他的博客，由于前期一直关注微笑并且跟着微笑的达人课完成了SpringBoot的入门，因此在此感谢两位大
       
     
     </summary>

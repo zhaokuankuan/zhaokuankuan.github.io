@@ -17,28 +17,20 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Springcloud微服务架构之服务的注册和发现 | 奋斗的小鸟</title>
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
+  <title>奋斗的小鸟</title>
+  <meta name="description" content="title: 程序员的一首诗comments: truetags: [杂谈]categories: [杂谈] date: 2018-08-11 17:34:31  我能抽象出整个世界..但是我不能抽象你.. 因为你在我心中是那么的具体…所以我的世界并不完整. 我可以重载甚至覆盖这个世界里的任何一种方法…但是我却不能重载对你的思念… 也许命中注定了.你在我的世界里是永远的烙上了静态的属性…而我不慎">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Springcloud微服务架构之服务的注册和发现">
-<meta property="og:url" content="http://yoursite.com/2018/07/03/Springcloud微服务架构之服务的注册和发现/index.html">
+<meta property="og:title" content="奋斗的小鸟">
+<meta property="og:url" content="http://struggling-bird.cn/2018/08/11/程序员的一首诗/index.html">
 <meta property="og:site_name" content="奋斗的小鸟">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
+<meta property="og:description" content="title: 程序员的一首诗comments: truetags: [杂谈]categories: [杂谈] date: 2018-08-11 17:34:31  我能抽象出整个世界..但是我不能抽象你.. 因为你在我心中是那么的具体…所以我的世界并不完整. 我可以重载甚至覆盖这个世界里的任何一种方法…但是我却不能重载对你的思念… 也许命中注定了.你在我的世界里是永远的烙上了静态的属性…而我不慎">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/2018050717322387?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180507173256574?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180507173310227?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180507173322191?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/2018050717333577?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180507173351441?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-07-03T04:12:47.026Z">
+<meta property="og:updated_time" content="2018-08-11T09:49:01.664Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Springcloud微服务架构之服务的注册和发现">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:title" content="奋斗的小鸟">
+<meta name="twitter:description" content="title: 程序员的一首诗comments: truetags: [杂谈]categories: [杂谈] date: 2018-08-11 17:34:31  我能抽象出整个世界..但是我不能抽象你.. 因为你在我心中是那么的具体…所以我的世界并不完整. 我可以重载甚至覆盖这个世界里的任何一种方法…但是我却不能重载对你的思念… 也许命中注定了.你在我的世界里是永远的烙上了静态的属性…而我不慎">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://yoursite.com/2018/07/03/Springcloud微服务架构之服务的注册和发现/index.html">
+  <link rel="canonical" href="http://struggling-bird.cn/2018/08/11/程序员的一首诗/index.html">
   
     <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
   
@@ -199,7 +191,7 @@
     <div class="widget-body">
         <div id="board">
             <div class="content">
-                <p>欢迎来到奋斗的小鸟的个人空间！</p>
+                <p>欢迎来到奋斗的小鸟的个人空间！</br> <a href="https://blog.csdn.net/zhaokk_git">Csdn博客</a></br> <a href="https://github.com/zhaokuankuan">Github仓库地址</a> </p>
             </div>
         </div>
     </div>
@@ -207,18 +199,39 @@
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Spring/" style="font-size: 13px;">Spring</a> <a href="/tags/SpringCloud/" style="font-size: 13.5px;">SpringCloud</a> <a href="/tags/Springboot/" style="font-size: 13px;">Springboot</a> <a href="/tags/java/" style="font-size: 14px;">java</a> <a href="/tags/二维码/" style="font-size: 13px;">二维码</a>
+    </div>
+  </div>
+
     
       
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">12</span></li></ul>
     </div>
   </div>
 
@@ -233,7 +246,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2018/07/03/springboot项目的搭建和基本的用法/" class="thumb">
+              <a href="/2018/08/11/基于SpringMVC的文件上传/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -247,10 +260,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2018/07/03/springboot项目的搭建和基本的用法/" class="title">springboot项目的搭建和基本的用法</a>
+                <a href="/2018/08/11/基于SpringMVC的文件上传/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-07-03T04:11:36.000Z" itemprop="datePublished">2018-07-03</time>
+                <time datetime="2018-08-11T10:03:42.590Z" itemprop="datePublished">2018-08-11</time>
               </p>
             </div>
           </li>
@@ -258,7 +271,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/" class="thumb">
+              <a href="/2018/08/11/基于Maven的搭建SSM框架的详细说明/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -272,10 +285,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/" class="title">Springcloud微服务架构之服务的注册和发现</a>
+                <a href="/2018/08/11/基于Maven的搭建SSM框架的详细说明/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-07-03T04:11:22.000Z" itemprop="datePublished">2018-07-03</time>
+                <time datetime="2018-08-11T10:03:42.590Z" itemprop="datePublished">2018-08-11</time>
               </p>
             </div>
           </li>
@@ -283,7 +296,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2018/07/03/SpringCloud微服务架构之服务的调用/" class="thumb">
+              <a href="/2018/08/11/程序员的一首诗/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -297,10 +310,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2018/07/03/SpringCloud微服务架构之服务的调用/" class="title">SpringCloud微服务架构之服务的调用</a>
+                <a href="/2018/08/11/程序员的一首诗/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-07-03T04:10:50.000Z" itemprop="datePublished">2018-07-03</time>
+                <time datetime="2018-08-11T10:03:42.575Z" itemprop="datePublished">2018-08-11</time>
               </p>
             </div>
           </li>
@@ -308,7 +321,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2018/07/03/Springcloud微服务架构之断路器-Hystrix/" class="thumb">
+              <a href="/2018/08/11/Vue+Webpack+node构建web和App项目/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -322,10 +335,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2018/07/03/Springcloud微服务架构之断路器-Hystrix/" class="title">Springcloud微服务架构之断路器(Hystrix)</a>
+                <a href="/2018/08/11/Vue+Webpack+node构建web和App项目/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-07-03T04:10:31.000Z" itemprop="datePublished">2018-07-03</time>
+                <time datetime="2018-08-11T10:03:42.575Z" itemprop="datePublished">2018-08-11</time>
               </p>
             </div>
           </li>
@@ -333,7 +346,7 @@
           <li>
             
             <div class="item-thumb">
-              <a href="/2018/07/03/Springcloud微服务架构之路由网关(zuul)/" class="thumb">
+              <a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -347,10 +360,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2018/07/03/Springcloud微服务架构之路由网关(zuul)/" class="title">从零开始学习SpringCloud</a>
+                <a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="title">(no title)</a>
               </p>
               <p class="item-date">
-                <time datetime="2018-07-03T04:08:24.000Z" itemprop="datePublished">2018-07-03</time>
+                <time datetime="2018-08-11T10:03:42.543Z" itemprop="datePublished">2018-08-11</time>
               </p>
             </div>
           </li>
@@ -368,23 +381,15 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Springcloud微服务架构之服务的注册和发现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-程序员的一首诗" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
-      
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Springcloud微服务架构之服务的注册和发现
-    </h1>
-  
-
       
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/" class="article-date">
-	  <time datetime="2018-07-03T04:11:22.000Z" itemprop="datePublished">2018-07-03</time>
+	<a href="/2018/08/11/程序员的一首诗/" class="article-date">
+	  <time datetime="2018-08-11T10:03:42.575Z" itemprop="datePublished">2018-08-11</time>
 	</a>
 </span>
         
@@ -393,26 +398,29 @@
         
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/07/03/Springcloud微服务架构之服务的注册和发现/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/11/程序员的一首诗/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 723(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 332(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry markdown-body" itemprop="articleBody">
       
-        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。</strong><br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上解释来自百度，综上可以看出对于微服务架构来说，服务的注册和服务的发现就很关键了，由于本人接触Dubbo和zookeeper较少因此谈谈Springcloud的注册和发现把。<br><strong>一.新建一个空的maven工程（任何东西都不选)如图</strong><br><img src="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>    Next： 然后填写 GroupId 和 ArtifactId 分别写入的是 包的层次结构基本上是公司的域名或者项目的域名。例 com.kk 或者  com.baidu等<br><strong>二.在新建好的该maven项目中新建两个module分别为server和service作为服务的注册中心和服务的提供方(创建方法类似)。</strong><br><img src="https://img-blog.csdn.net/2018050717322387?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173256574?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173310227?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173322191?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注册中心选择server  , 服务提供者选择discovery<br><strong>三.Server的配置，创建一个application.yml文件</strong><br>然后配置yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false #表示是否将自己注册到Eureka Server</span><br><span class="line">    fetch-registry: false #表示是否从Eureka Server获取注册信息</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/   #注册中心的地址</span><br></pre></td></tr></table></figure>
-<p>然后启动server的这个项目，访问<a href="http://localhost:8761/" target="_blank" rel="noopener">http://localhost:8761/</a>   你就看到如下的界面<br><img src="https://img-blog.csdn.net/2018050717333577?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>说明注册中心已经配置完成，只是里面没有注册服务。<br>Ps：在这里说一下，因为我们在做分布式部署的时候为了保证项目的健壮性我们通常会采用集群部署，因为可以参考微笑的博客来设置注册中心的集群。<br><strong>四.接下来我们应该向注册中心注册服务了，首先创建application.yml文件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在ServiceApplication类中开启服务发现的注解</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaClient</span><br><span class="line">public class ServiceApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(ServiceApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后配置yml</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">`server:</span><br><span class="line">  port: 8762 #设置服务的端口号</span><br><span class="line">client:</span><br><span class="line">    serviceUrl:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: service-A</span><br></pre></td></tr></table></figure>
-<p>`<br>然后再次访问注册中心，你就发现我们的服务已经注册进去了。<br><img src="https://img-blog.csdn.net/20180507173351441?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><strong>到此，springcloud的服务的注册和发现已经完成。</strong><br>在此感谢，两位大佬的博客，我是根据以上大佬的博客学习的！<br><a href="https://blog.csdn.net/forezp/article/details/70148833" target="_blank" rel="noopener">方志鹏的springcloud微服务架构</a><br><a href="http://www.ityouknow.com/spring-cloud.html" target="_blank" rel="noopener">纯洁的微笑</a></p>
+        <hr>
+<p>title: 程序员的一首诗<br>comments: true<br>tags: [杂谈]<br>categories: [杂谈]</p>
+<h2 id="date-2018-08-11-17-34-31"><a href="#date-2018-08-11-17-34-31" class="headerlink" title="date: 2018-08-11 17:34:31  "></a>date: 2018-08-11 17:34:31  </h2><p>我能抽象出整个世界..<br>但是我不能抽象你..</p>
+<p>因为你在我心中是那么的具体…<br>所以我的世界并不完整.</p>
+<p>我可以重载甚至覆盖这个世界里的任何一种方法…<br>但是我却不能重载对你的思念…</p>
+<p>也许命中注定了.你在我的世界里是永远的烙上了静态的属性…<br>而我不慎调用了爱你这个方法..</p>
+<p>当我义无返顾的把自己作为参数传进这个方法时…<br>我才发现爱上你是一个死循环..</p>
+<p>它不停的返回对你的思念压入我的心里的堆栈..<br>在这无尽的黑夜中…</p>
+<p>我的内存里已经再也装不下别人…<br>我不停的向系统申请空间..<br>但却捕获一个异常–我爱的人不爱我…<br>为了解决这个异常…<br>我愿意虚拟出最后一点内存..<br>把所有我能实现的方法地址压入堆栈..<br>并且在栈尾压入最后一个方法–将字符串”我爱你，你爱我吗 “传递给你..<br>如果返回的值为真–我将用尽一生去爱你…</p>
+<p>否则—我将释放掉所有系统资源…</p>
 
       
     </div>
@@ -422,7 +430,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://yoursite.com/2018/07/03/Springcloud微服务架构之服务的注册和发现/" title="Springcloud微服务架构之服务的注册和发现" target="_blank" rel="external">http://yoursite.com/2018/07/03/Springcloud微服务架构之服务的注册和发现/</a>
+      <a href="http://struggling-bird.cn/2018/08/11/程序员的一首诗/" title="" target="_blank" rel="external">http://struggling-bird.cn/2018/08/11/程序员的一首诗/</a>
     </li>
     
     
@@ -444,7 +452,7 @@
       </div>
       <div class="media-body">
         <h3 class="media-heading"><a href="https://github.com/zhaokuankuan" target="_blank"><span class="text-dark">奋斗的小鸟</span><small class="ml-1x">Web Developer &amp; Coder</small></a></h3>
-        <div>个人简介。</div>
+        <div>愿半生戎码，归来仍为少年！</div>
       </div>
     </figure>
   </div>
@@ -486,12 +494,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/07/03/springboot项目的搭建和基本的用法/" title="springboot项目的搭建和基本的用法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2018/08/11/基于Maven的搭建SSM框架的详细说明/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/07/03/SpringCloud微服务架构之服务的调用/" title="SpringCloud微服务架构之服务的调用"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/08/11/Vue+Webpack+node构建web和App项目/" title="(no title)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -507,7 +515,7 @@
   
   <div class="bar-right">
     
-    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    <div class="share-component" data-sites="weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin" data-mobile-sites="weibo,qq,wechat"></div>
     
   </div>
   </div>

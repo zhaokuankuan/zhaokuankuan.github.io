@@ -4,14 +4,28 @@
   <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2018-08-10T04:59:08.797Z</lastmod>
+    <lastmod>2018-08-11T08:50:27.461Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2018-08-11T08:18:11.434Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2018-08-11T08:15:23.493Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/repository/index.html</loc>
     
-    <lastmod>2018-08-07T08:29:54.592Z</lastmod>
+    <lastmod>2018-08-11T08:12:03.721Z</lastmod>
     
   </url>
   
@@ -61,20 +75,6 @@
     <loc>http://yoursite.com/2018/07/03/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0SpringCloud/</loc>
     
     <lastmod>2018-07-03T04:08:39.549Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    
-    <lastmod>2018-06-30T09:16:13.787Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2018-06-30T09:16:13.787Z</lastmod>
     
   </url>
   

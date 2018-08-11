@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://struggling-bird.cn/2018/08/11/Springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B9%8B%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B3%A8%E5%86%8C%E5%92%8C%E5%8F%91%E7%8E%B0/</loc>
+    <lastmod>2018-08-11T11:20:34.497Z</lastmod>
+    <data>
+        <display>
+        <title>Springcloud微服务架构之服务的注册和发现</title>
+        <pubTime>2018-08-11T09:34:31.000Z</pubTime>
+        
+        <tag>SpringCloud</tag>
+         
+        <tag>java</tag>
+         
+         
+           
+             
+              <breadCrumb title="微服务架构" url="http://struggling-bird.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://struggling-bird.cn/2018/08/11/%E5%9F%BA%E4%BA%8EMaven%E7%9A%84%E6%90%AD%E5%BB%BASSM%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E/</loc>
     <lastmod>2018-08-11T10:39:51.510Z</lastmod>
     <data>
@@ -192,28 +214,6 @@
 
     
   <url>
-    <loc>http://struggling-bird.cn/2018/08/11/Springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B9%8B%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B3%A8%E5%86%8C%E5%92%8C%E5%8F%91%E7%8E%B0/</loc>
-    <lastmod>2018-08-11T10:04:48.178Z</lastmod>
-    <data>
-        <display>
-        <title>Springcloud微服务架构之服务的注册和发现</title>
-        <pubTime>2018-08-11T09:34:31.000Z</pubTime>
-        
-        <tag>SpringCloud</tag>
-         
-        <tag>java</tag>
-         
-         
-           
-             
-              <breadCrumb title="微服务架构" url="http://struggling-bird.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://struggling-bird.cn/2018/08/11/Springcloud%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E4%B9%8B%E6%96%AD%E8%B7%AF%E5%99%A8-Hystrix/</loc>
     <lastmod>2018-08-11T10:04:39.921Z</lastmod>
     <data>
@@ -267,9 +267,9 @@
         
         <tag>java</tag>
          
-        <tag>二维码</tag>
-         
         <tag>Spring</tag>
+         
+        <tag>二维码</tag>
          
          
            

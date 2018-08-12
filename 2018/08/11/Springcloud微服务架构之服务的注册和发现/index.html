@@ -18,13 +18,13 @@
   
   
   <title>Springcloud微服务架构之服务的注册和发现 | 奋斗的小鸟</title>
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
+  <meta name="description" content="微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。    &amp;nb">
 <meta name="keywords" content="SpringCloud,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springcloud微服务架构之服务的注册和发现">
 <meta property="og:url" content="http://struggling-bird.cn/2018/08/11/Springcloud微服务架构之服务的注册和发现/index.html">
 <meta property="og:site_name" content="奋斗的小鸟">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
+<meta property="og:description" content="微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。    &amp;nb">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/2018050717322387?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
@@ -33,10 +33,10 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20180507173322191?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/2018050717333577?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180507173351441?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2018-08-11T11:20:34.497Z">
+<meta property="og:updated_time" content="2018-08-12T07:30:37.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springcloud微服务架构之服务的注册和发现">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特">
+<meta name="twitter:description" content="微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。    &amp;nb">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
   <!-- Canonical links -->
   <link rel="canonical" href="http://struggling-bird.cn/2018/08/11/Springcloud微服务架构之服务的注册和发现/index.html">
@@ -275,7 +275,7 @@
           <li>
             
             <!--<div class="item-thumb">-->
-              <!--<a href="/2018/08/11/springboot项目的搭建和基本的用法/" class="thumb">
+              <!--<a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -286,10 +286,10 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/微服务架构/">微服务架构</a>
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
               </p>
               <p class="item-title">
-                <a href="/2018/08/11/springboot项目的搭建和基本的用法/" class="title">springboot项目的搭建和基本的用法</a>
+                <a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="title">亲测javaWeb的Excel的文件导入</a>
               </p>
               <p class="item-date">
                 <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
@@ -300,7 +300,7 @@
           <li>
             
             <!--<div class="item-thumb">-->
-              <!--<a href="/2018/08/11/Springcloud微服务架构之断路器-Hystrix/" class="thumb">
+              <!--<a href="/2018/08/11/SpringCloud微服务架构之服务的调用/" class="thumb">
     
     
         <span class="thumb-image thumb-none"></span>
@@ -314,7 +314,32 @@
                 <a class="category-link" href="/categories/微服务架构/">微服务架构</a>
               </p>
               <p class="item-title">
-                <a href="/2018/08/11/Springcloud微服务架构之断路器-Hystrix/" class="title">Springcloud微服务架构之断路器(Hystrix)</a>
+                <a href="/2018/08/11/SpringCloud微服务架构之服务的调用/" class="title">SpringCloud微服务架构之服务的调用</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/11/Springcloud微服务架构之服务的注册和发现/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/微服务架构/">微服务架构</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/11/Springcloud微服务架构之服务的注册和发现/" class="title">Springcloud微服务架构之服务的注册和发现</a>
               </p>
               <p class="item-date">
                 <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
@@ -340,31 +365,6 @@
               </p>
               <p class="item-title">
                 <a href="/2018/08/11/Springcloud微服务架构之路由网关(zuul)/" class="title">Springcloud微服务架构之路由网关(zuul)</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <!--<div class="item-thumb">-->
-              <!--<a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
--->
-            <!--</div>-->
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
-              </p>
-              <p class="item-title">
-                <a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" class="title">亲测javaWeb的Excel的文件导入</a>
               </p>
               <p class="item-date">
                 <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
@@ -433,7 +433,7 @@
     </div>
     <div class="article-entry markdown-body" itemprop="articleBody">
       
-        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。</strong><br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上解释来自百度，综上可以看出对于微服务架构来说，服务的注册和服务的发现就很关键了，由于本人接触Dubbo和zookeeper较少因此谈谈Springcloud的注册和发现把。<br><strong>一.新建一个空的maven工程（任何东西都不选)如图</strong><br><img src="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>    Next： 然后填写 GroupId 和 ArtifactId 分别写入的是 包的层次结构基本上是公司的域名或者项目的域名。例 com.kk 或者  com.baidu等<br><strong>二.在新建好的该maven项目中新建两个module分别为server和service作为服务的注册中心和服务的提供方(创建方法类似)。</strong><br><img src="https://img-blog.csdn.net/2018050717322387?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173256574?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173310227?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173322191?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注册中心选择server  , 服务提供者选择discovery<br><strong>三.Server的配置，创建一个application.yml文件</strong><br>然后配置yml</p>
+        <p><strong>微服务可以在”自己的程序”中运行，并通过”轻量级设备与HTTP型API进行沟通”。关键在于该服务可以在自己的程序中运行。通过这一点我们就可以将服务公开与微服务架构(在现有系统中分布一个API)区分开来。在服务公开中，许多服务都可以被内部独立进程所限制。如果其中任何一个服务需要增加某种功能，那么就必须缩小进程范围。在微服务架构中，只需要在特定的某种服务中增加所需功能，而不影响整体进程。</strong><br>    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以上解释来自百度，综上可以看出对于微服务架构来说，服务的注册和服务的发现就很关键了，由于本人接触Dubbo和zookeeper较少因此谈谈Springcloud的注册和发现把。<br><strong>一.新建一个空的maven工程（任何东西都不选)如图</strong><br><img src="https://img-blog.csdn.net/20180507173152623?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>    Next： 然后填写 GroupId 和 ArtifactId 分别写入的是 包的层次结构基本上是公司的域名或者项目的域名。例 com.kk 或者  com.baidu等<br><strong>二.在新建好的该maven项目中新建两个module分别为server和service作为服务的注册中心和服务的提供方(创建方法类似)。</strong><br><img src="https://img-blog.csdn.net/2018050717322387?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173256574?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173310227?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><img src="https://img-blog.csdn.net/20180507173322191?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>注册中心选择server  , 服务提供者选择discovery<br><strong>三.Server的配置，创建一个application.yml文件</strong><br>然后配置yml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false #表示是否将自己注册到Eureka Server</span><br><span class="line">    fetch-registry: false #表示是否从Eureka Server获取注册信息</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/   #注册中心的地址</span><br></pre></td></tr></table></figure>
 <p>然后启动server的这个项目，访问<a href="http://localhost:8761/" target="_blank" rel="noopener">http://localhost:8761/</a>   你就看到如下的界面<br><img src="https://img-blog.csdn.net/2018050717333577?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3poYW9ra19naXQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br>说明注册中心已经配置完成，只是里面没有注册服务。<br>Ps：在这里说一下，因为我们在做分布式部署的时候为了保证项目的健壮性我们通常会采用集群部署，因为可以参考微笑的博客来设置注册中心的集群。<br><strong>四.接下来我们应该向注册中心注册服务了，首先创建application.yml文件</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在ServiceApplication类中开启服务发现的注解</span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaClient</span><br><span class="line">public class ServiceApplication &#123;</span><br><span class="line"></span><br><span class="line">   public static void main(String[] args) &#123;</span><br><span class="line">      SpringApplication.run(ServiceApplication.class, args);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -513,12 +513,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2018/08/11/亲测javaWeb的Excel的文件导入/" title="亲测javaWeb的Excel的文件导入"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2018/08/11/SpringCloud微服务架构之服务的调用/" title="SpringCloud微服务架构之服务的调用"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2018/08/11/SpringCloud微服务架构之服务的调用/" title="SpringCloud微服务架构之服务的调用"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/08/11/Springcloud微服务架构之路由网关(zuul)/" title="Springcloud微服务架构之路由网关(zuul)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

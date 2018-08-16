@@ -18,20 +18,20 @@
   
   
   <title>Springboot的用法之整合Mybatis | 奋斗的小鸟</title>
-  <meta name="description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+  <meta name="description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springboot项目的搭建和">
 <meta name="keywords" content="MyBatis,Springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Springboot的用法之整合Mybatis">
 <meta property="og:url" content="http://struggling-bird.cn/2018/08/16/blog13/index.html">
 <meta property="og:site_name" content="奋斗的小鸟">
-<meta property="og:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+<meta property="og:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springboot项目的搭建和">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://struggling-bird.cn/2018/08/16/blog13/1.png">
 <meta property="og:image" content="http://struggling-bird.cn/2018/08/16/blog13/2.png">
-<meta property="og:updated_time" content="2018-08-16T04:31:20.306Z">
+<meta property="og:updated_time" content="2018-08-16T04:54:44.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Springboot的用法之整合Mybatis">
-<meta name="twitter:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+<meta name="twitter:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springboot项目的搭建和">
 <meta name="twitter:image" content="http://struggling-bird.cn/2018/08/16/blog13/1.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://struggling-bird.cn/2018/08/16/blog13/index.html">
@@ -320,31 +320,6 @@
           <li>
             
             <!--<div class="item-thumb">-->
-              <!--<a href="/2018/08/11/blog12/" class="thumb">
-    
-    
-        <span class="thumb-image thumb-none"></span>
-    
-</a>
--->
-            <!--</div>-->
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
-              </p>
-              <p class="item-title">
-                <a href="/2018/08/11/blog12/" class="title">基于SpringMVC的文件上传</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <!--<div class="item-thumb">-->
               <!--<a href="/2018/08/11/blog9/" class="thumb">
     
     
@@ -360,6 +335,31 @@
               </p>
               <p class="item-title">
                 <a href="/2018/08/11/blog9/" class="title">基于Maven的搭建SSM框架的详细说明</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/11/blog2/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/微服务架构/">微服务架构</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/11/blog2/" class="title">从零开始学习SpringCloud</a>
               </p>
               <p class="item-date">
                 <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
@@ -418,7 +418,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/16/blog13/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,009(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,002(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
@@ -431,8 +431,6 @@
         <p><strong><em>Springboot的用法之整合Mybatis</em></strong></p>
 <hr>
 <p>因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。</p>
-<hr>
-<p><a href="http://www.struggling-bird.cn" target="_blank" rel="noopener">个人网站传送门</a></p>
 <hr>
 <p>一.  准备工作<br>    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》<a href="https://blog.csdn.net/zhaokk_git/article/details/79608197" target="_blank" rel="noopener">springboot项目的搭建和基本的用法</a><br>    本文将使用的是Springboot2.0版本<br>    PS:开发的过程中最好启动热部署，那样的话会让工作量大大的减少。</p>
 <hr>
@@ -630,6 +628,9 @@
         
         <div class="publishby">
             Power By <a href="https://github.com/zhaokuankuan" target="_blank">zhaokk</a> base on pure
+        </div>
+         <div class="publishby">
+            陕ICP备18014169号-1
         </div>
     </div>
 </footer>

@@ -4,6 +4,72 @@
 
     
   <url>
+    <loc>http://struggling-bird.cn/2018/08/16/blog14/</loc>
+    <lastmod>2018-08-16T04:39:45.849Z</lastmod>
+    <data>
+        <display>
+        <title>Springboot的用法之整合Swagger</title>
+        <pubTime>2018-08-16T04:31:59.000Z</pubTime>
+        
+        <tag>Springboot</tag>
+         
+        <tag>Swagger</tag>
+         
+         
+           
+             
+              <breadCrumb title="JavaWeb" url="http://struggling-bird.cn/categories/JavaWeb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://struggling-bird.cn/2018/08/16/blog13/</loc>
+    <lastmod>2018-08-16T04:31:20.306Z</lastmod>
+    <data>
+        <display>
+        <title>Springboot的用法之整合Mybatis</title>
+        <pubTime>2018-08-16T04:25:07.000Z</pubTime>
+        
+        <tag>MyBatis</tag>
+         
+        <tag>Springboot</tag>
+         
+         
+           
+             
+              <breadCrumb title="javaWeb" url="http://struggling-bird.cn/categories/javaWeb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://struggling-bird.cn/2018/08/11/blog8/</loc>
+    <lastmod>2018-08-16T04:29:10.358Z</lastmod>
+    <data>
+        <display>
+        <title>springboot项目的搭建和基本的用法</title>
+        <pubTime>2018-08-11T09:34:31.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>Springboot</tag>
+         
+         
+           
+             
+              <breadCrumb title="javaWeb" url="http://struggling-bird.cn/categories/javaWeb/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://struggling-bird.cn/2018/08/11/blog9/</loc>
     <lastmod>2018-08-12T10:02:43.465Z</lastmod>
     <data>
@@ -23,28 +89,6 @@
            
              
               <breadCrumb title="JavaWeb" url="http://struggling-bird.cn/categories/JavaWeb/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://struggling-bird.cn/2018/08/11/blog8/</loc>
-    <lastmod>2018-08-12T09:49:51.841Z</lastmod>
-    <data>
-        <display>
-        <title>springboot项目的搭建和基本的用法</title>
-        <pubTime>2018-08-11T09:34:31.000Z</pubTime>
-        
-        <tag>java</tag>
-         
-        <tag>Springboot</tag>
-         
-         
-           
-             
-              <breadCrumb title="微服务架构" url="http://struggling-bird.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
           
         </display>
     </data>

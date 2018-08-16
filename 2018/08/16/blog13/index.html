@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Springboot的用法之整合Mybatis | 奋斗的小鸟</title>
+  <meta name="description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+<meta name="keywords" content="MyBatis,Springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Springboot的用法之整合Mybatis">
+<meta property="og:url" content="http://struggling-bird.cn/2018/08/16/blog13/index.html">
+<meta property="og:site_name" content="奋斗的小鸟">
+<meta property="og:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/16/blog13/1.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/16/blog13/2.png">
+<meta property="og:updated_time" content="2018-08-16T04:31:20.306Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Springboot的用法之整合Mybatis">
+<meta name="twitter:description" content="Springboot的用法之整合Mybatis  因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。  个人网站传送门  一.  准备工作    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》springb">
+<meta name="twitter:image" content="http://struggling-bird.cn/2018/08/16/blog13/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://struggling-bird.cn/2018/08/16/blog13/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zhaokuankuan" target="_blank">
+          <img class="img-circle img-rotate" src="/images/kaola.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">奋斗的小鸟</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Coder</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Xian, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="http://weibo.com/u/5560716562" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://github.com/zhaokuankuan" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎来到奋斗的小鸟的个人空间！</br> <a href="https://blog.csdn.net/zhaokk_git">Csdn博客</a></br> <a href="https://github.com/zhaokuankuan">Github仓库地址</a> </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web前端/">Web前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaWeb/">javaWeb</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POI/">POI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/16/blog14/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/16/blog14/" class="title">Springboot的用法之整合Swagger</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-16T04:31:59.000Z" itemprop="datePublished">2018-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/16/blog13/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/javaWeb/">javaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/16/blog13/" class="title">Springboot的用法之整合Mybatis</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-16T04:25:07.000Z" itemprop="datePublished">2018-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/11/blog1/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Web前端/">Web前端</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/11/blog1/" class="title">Vue+Webpack+node构建web和App项目</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-11T10:16:02.000Z" itemprop="datePublished">2018-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/11/blog12/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/11/blog12/" class="title">基于SpringMVC的文件上传</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/11/blog9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/11/blog9/" class="title">基于Maven的搭建SSM框架的详细说明</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-blog13" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Springboot的用法之整合Mybatis
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/08/16/blog13/" class="article-date">
+	  <time datetime="2018-08-16T04:25:07.000Z" itemprop="datePublished">2018-08-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/javaWeb/">javaWeb</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/MyBatis/">MyBatis</a>, <a class="article-tag-link" href="/tags/Springboot/">Springboot</a>
+  </span>
+
+
+        
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/16/blog13/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,009(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p><strong><em>Springboot的用法之整合Mybatis</em></strong></p>
+<hr>
+<p>因为Springboot在现在的JaveWeb开发中使用越来越多，今天就出一个Springboot整合Mybatis的文章，因为Springboot一直崇尚的就是“约定大于配置”，因为在本篇只会有很少的配置文件。</p>
+<hr>
+<p><a href="http://www.struggling-bird.cn" target="_blank" rel="noopener">个人网站传送门</a></p>
+<hr>
+<p>一.  准备工作<br>    首先你需要先创建好一个Springboot的工程，具体的步骤可参考上一篇==》<a href="https://blog.csdn.net/zhaokk_git/article/details/79608197" target="_blank" rel="noopener">springboot项目的搭建和基本的用法</a><br>    本文将使用的是Springboot2.0版本<br>    PS:开发的过程中最好启动热部署，那样的话会让工作量大大的减少。</p>
+<hr>
+<p>二 . 开始集成Mybatis</p>
+<ol>
+<li>首先需引入Mybatis和Mysql的相关依赖包</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--mysql的核心包--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;5.1.45&lt;/version&gt;</span><br><span class="line">	&lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--mybatis工具类--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.3.1&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!--swagger依赖文件--&gt;</span><br></pre></td></tr></table></figure>
+<p> 2 然后开始配置Springboot的配置文件，在application.yml中增加数据库的配置，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#数据库的配置信息</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driverClassName: com.mysql.jdbc.Driver</span><br><span class="line">    url: jdbc:mysql://localhost:3306/testuseUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</span><br><span class="line">    username: root</span><br><span class="line">    password: root</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">然后再开启sql的打印，增加如下配置：</span><br><span class="line">#配置sql的打印 //包路径为mapper文件包路径</span><br><span class="line">configuration:</span><br><span class="line">    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>至此，配置已基本完成，我的工程的目录结构如图示：<br><img src="/2018/08/16/blog13/1.png" alt="这里写图片描述"></p>
+<p>3 具体的代码实现：</p>
+</li>
+<li><p>controller==&gt;DemoController</p>
+</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.Springbootmanger.controller;</span><br><span class="line"></span><br><span class="line">import com.kk.Springbootmanger.dao.UserDao;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import javax.management.Query;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author :zhaokk</span></span><br><span class="line"><span class="comment"> * @date: 2018/8/13 - 16:27</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@RestController</span><br><span class="line">public class DemoController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserDao userDao;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = <span class="string">"/hello"</span>,method = RequestMethod.GET)</span><br><span class="line">    public String sayHello(String name)&#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(value = <span class="string">"/getAll"</span>,method = &#123;RequestMethod<span class="selector-class">.GET</span>,RequestMethod.POST&#125;)</span><br><span class="line">    public Object getAll()&#123;</span><br><span class="line">        return userDao.getAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>domain==&gt;User.java</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.Springbootmanger.domain;</span><br><span class="line"></span><br><span class="line">import com.kk.Springbootmanger.common.UserSexEnum;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @author :Mr.kk</span></span><br><span class="line"><span class="comment">* @date: 2018/8/14/9:41</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">public class User &#123;</span><br><span class="line"> private Long id;</span><br><span class="line"></span><br><span class="line"> private String userName;</span><br><span class="line"></span><br><span class="line"> private String passWord;</span><br><span class="line"></span><br><span class="line"> private UserSexEnum userEnum;</span><br><span class="line"></span><br><span class="line"> private String nickName;</span><br><span class="line"></span><br><span class="line"> public User() &#123;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public User(Long id, String userName, String passWord, UserSexEnum userEnum, String nickName) &#123;</span><br><span class="line">     this.id = id;</span><br><span class="line">     this.userName = userName;</span><br><span class="line">     this.passWord = passWord;</span><br><span class="line">     this.userEnum = userEnum;</span><br><span class="line">     this.nickName = nickName;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public void setId(Long id) &#123;</span><br><span class="line">     this.id = id;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public void setUserName(String userName) &#123;</span><br><span class="line">     this.userName = userName;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public void setPassWord(String passWord) &#123;</span><br><span class="line">     this.passWord = passWord;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public void setUserEnum(UserSexEnum userEnum) &#123;</span><br><span class="line">     this.userEnum = userEnum;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public void setNickName(String nickName) &#123;</span><br><span class="line">     this.nickName = nickName;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public Long getId() &#123;</span><br><span class="line">     return id;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public String getUserName() &#123;</span><br><span class="line">     return userName;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public String getPassWord() &#123;</span><br><span class="line">     return passWord;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public UserSexEnum getUserEnum() &#123;</span><br><span class="line">     return userEnum;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> public String getNickName() &#123;</span><br><span class="line">     return nickName;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>dao==&gt;UserDao.java</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.Springbootmanger.dao;</span><br><span class="line"></span><br><span class="line">import com.kk.Springbootmanger.domain.User;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @author :Mr.kk</span></span><br><span class="line"><span class="comment">* @date: 2018/8/14-9:44</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">public interface UserDao &#123;</span><br><span class="line">  <span class="comment">//全查</span></span><br><span class="line">  List&lt;User&gt; getAll();</span><br><span class="line">  <span class="comment">//根据id进行查询</span></span><br><span class="line">  User getOne(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mapper==&gt;UserMapper.xml</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC <span class="string">"-//mybatis.org//DTD Mapper 3.0//EN"</span> <span class="string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span> &gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">"com.kk.Springbootmanger.dao.UserDao"</span> &gt;</span><br><span class="line"></span><br><span class="line">&lt;resultMap id=<span class="string">"BaseResultMap"</span> type=<span class="string">"com.kk.Springbootmanger.domain.User"</span> &gt;</span><br><span class="line">   &lt;id column=<span class="string">"id"</span> property=<span class="string">"id"</span> jdbcType=<span class="string">"BIGINT"</span> /&gt;</span><br><span class="line">   &lt;result column=<span class="string">"userName"</span> property=<span class="string">"userName"</span> jdbcType=<span class="string">"VARCHAR"</span> /&gt;</span><br><span class="line">   &lt;result column=<span class="string">"passWord"</span> property=<span class="string">"passWord"</span> jdbcType=<span class="string">"VARCHAR"</span> /&gt;</span><br><span class="line">   &lt;result column=<span class="string">"user_sex"</span> property=<span class="string">"userEnum"</span> javaType=<span class="string">"com.kk.Springbootmanger.common.UserSexEnum"</span>/&gt;</span><br><span class="line">   &lt;result column=<span class="string">"nick_name"</span> property=<span class="string">"nickName"</span> jdbcType=<span class="string">"VARCHAR"</span> /&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">&lt;sql id=<span class="string">"Base_Column_List"</span> &gt;</span><br><span class="line">   id, userName, passWord, user_sex, nick_name</span><br><span class="line">&lt;/sql&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"getAll"</span> resultMap=<span class="string">"BaseResultMap"</span>  &gt;</span><br><span class="line">   SELECT</span><br><span class="line">   &lt;include refid=<span class="string">"Base_Column_List"</span> /&gt;</span><br><span class="line">   FROM users</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"getOne"</span> parameterType=<span class="string">"Long"</span> resultMap=<span class="string">"BaseResultMap"</span> &gt;</span><br><span class="line">   SELECT</span><br><span class="line">   &lt;include refid=<span class="string">"Base_Column_List"</span> /&gt;</span><br><span class="line">   FROM users</span><br><span class="line">   WHERE id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<p> 5.至此，基本的配置文件和配置已经完成</p>
+<hr>
+<p>三.启动，验证<br>    启动该工程，然后访问 <a href="http://localhost:8081/manager/getAll" target="_blank" rel="noopener">http://localhost:8081/manager/getAll</a> ，如图所示即成功了，顺便看到控制台打印出来的sql,完整的代码已经上传至<a href="https://github.com/zhaokuankuan/springboot-mybatis" target="_blank" rel="noopener">Gihub</a><br>   <img src="/2018/08/16/blog13/2.png" alt="这里写图片描述"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://struggling-bird.cn/2018/08/16/blog13/" title="Springboot的用法之整合Mybatis" target="_blank" rel="external">http://struggling-bird.cn/2018/08/16/blog13/</a>
+    </li>
+    
+    
+      <li class="post-copyright-license">
+        <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+      </li>
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zhaokuankuan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/kaola.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zhaokuankuan" target="_blank"><span class="text-dark">奋斗的小鸟</span><small class="ml-1x">Web Developer &amp; Coder</small></a></h3>
+        <div>愿半生戎码，归来仍为少年！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zODc3OC8xNTMwNg==">
+  <script type="text/javascript">
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+
+          if (typeof LivereTower === 'function') { return; }
+
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+  </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/08/16/blog14/" title="Springboot的用法之整合Swagger"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/08/11/blog1/" title="Vue+Webpack+node构建web和App项目"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="http://weibo.com/u/5560716562" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://github.com/zhaokuankuan" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2018 奋斗的小鸟
+        
+        <div class="publishby">
+            Power By <a href="https://github.com/zhaokuankuan" target="_blank">zhaokk</a> base on pure
+        </div>
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+
+    
+    
+        
+    
+    
+
+    <script defer>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6759adeabc072e4a92c5e3fda98880b2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+</body>
+</html>

@@ -17,16 +17,29 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>归档: 2018 | 奋斗的小鸟</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="奋斗的小鸟">
-<meta property="og:url" content="http://struggling-bird.cn/archives/2018/index.html">
+  <title>Redis的安装和详细配置 | 奋斗的小鸟</title>
+  <meta name="description" content="一.Redis的优点：(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)(2) 支持丰富数据类型，支持string，list，set，sorted set，hash(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis的安装和详细配置">
+<meta property="og:url" content="http://struggling-bird.cn/2018/08/30/blog16/index.html">
 <meta property="og:site_name" content="奋斗的小鸟">
+<meta property="og:description" content="一.Redis的优点：(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)(2) 支持丰富数据类型，支持string，list，set，sorted set，hash(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/1.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/2.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/3.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/4.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/5.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/6.png">
+<meta property="og:image" content="http://struggling-bird.cn/2018/08/30/blog16/7.png">
+<meta property="og:updated_time" content="2018-08-30T06:33:42.814Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奋斗的小鸟">
+<meta name="twitter:title" content="Redis的安装和详细配置">
+<meta name="twitter:description" content="一.Redis的优点：(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)(2) 支持丰富数据类型，支持string，list，set，sorted set，hash(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除">
+<meta name="twitter:image" content="http://struggling-bird.cn/2018/08/30/blog16/1.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://struggling-bird.cn/archives/2018/index.html">
+  <link rel="canonical" href="http://struggling-bird.cn/2018/08/30/blog16/index.html">
   
     <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
   
@@ -371,153 +384,206 @@
   
   
 <main class="main" role="main">
-  	<article class="content article article-archives article-type-list" itemscope="">
-	    <header class="article-header">
-	      <h1 itemprop="title">归档: 2018</h1>
-	      <p class="text-muted">共 10 篇文章</p>
-	    </header>
-	    <div class="article-body">
-	      
-  
-  
+  <div class="content">
+  <article id="post-blog16" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-    
+    <div class="article-header">
       
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Redis的安装和详细配置
+    </h1>
+  
+
       
-      <section class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse2018" aria-expanded="true">
-              <i class="icon icon-calendar-plus text-active"></i><i class="icon icon-calendar-minus text"></i>
-              2018
-            </a>
-            <!-- <a href="/archives/2018" class="archive-year">2018</a> -->
-          </h3>
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/08/30/blog16/" class="article-date">
+	  <time datetime="2018-08-30T06:31:00.000Z" itemprop="datePublished">2018-08-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/redis/">redis</a>
+  </span>
+
+
+        
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/30/blog16/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 868(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 3(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p><strong>一.Redis的优点：</strong><br>(1) 速度快，因为数据存在内存中，类似于HashMap，HashMap的优势就是查找和操作的时间复杂度都是O(1)<br>(2) 支持丰富数据类型，支持string，list，set，sorted set，hash<br>(3) 支持事务，操作都是原子性，所谓的原子性就是对数据的更改要么全部执行，要么全部不执行<br>(4) 丰富的特性：可用于缓存，消息，按key设置过期时间，过期后将会自动删除</p>
+<hr>
+<p><strong>二.Redis的使用场景：</strong><br>(1)数据缓存：<br> 因为Redis是在内存中运行的数据库，因为对于处理请求来说响应速度较快，基于此我们可以将一些变更不太大的数据存入redis中，这样会减轻我们的数据库的压力同时还可以提高系统的性能，解决数据库的性能瓶颈<br> (2)会话缓存(session共享)<br> 随着分布式架构的流行，在集群部署的情况下当我们访问一个服务的时候可能会出现session的问题，虽然有不同的解决方法，如：session复制和session绑定等。但是对于性能方面来说，用外部缓存来管理redis可能是更好的方案了。<br> (3)消息队列<br> Redis提供了List和Set操作，因此可以用Redis来作为一个消息队列来处理。<br> (4)计数器和排行榜<br>  因为Redis支持set和zset两种方式的存储结构，因为我们可以用这种存储方式来进行计数器和排行榜的统计，可以从zset中存取出需要的排名段。<br> (5)发布和订阅<br> 发布/订阅的使用场景确实非常多。我已看见人们在社交网络连接中使用，还可作为基于发布/订阅的脚本触发器，甚至用Redis的发布/订阅功能来建立聊天系统！<br> 接下来，开始讲解Redis在Windows系统上面的安装和配置吧！</p>
+<hr>
+<p> <strong>三.先下载和配置Redis</strong><br>     由于Redis官方没有提供windows版本的安装包，因为我们需要自己下载个。<br>    我这里给出一个Github提供的安装包 <a href="https://github.com/MicrosoftArchive/redis/releases" target="_blank" rel="noopener">https://github.com/MicrosoftArchive/redis/releases</a><br>    如图：<br>    <img src="/2018/08/30/blog16/1.png" alt="这里写图片描述"><br>    下载下来之后，我们将下载的压缩包并且解压，如图：<br>    <img src="/2018/08/30/blog16/2.png" alt="这里写图片描述"><br>    接下里我们在Dos框中切入到redis的解压目录下，输入：redis-server.exe redis.windows.conf<br>    可以看到如下的输出狂，redis便启动了，如图：<br>  <img src="/2018/08/30/blog16/3.png" alt="这里写图片描述"><br>   redis在安装的时候默认是没有密码的，这里我们可以收到的修改Redis的密码：<br>   修改安装目录下的redis.windows.conf文件，增加 requirepass 密码，如图：<br> <img src="/2018/08/30/blog16/4.png" alt="这里写图片描述"><br>   数据库的配置就完成了。</p>
+<hr>
+<p><strong>四.客户端的链接</strong><br>    同理，服务器的窗口不能关，然后切入到redis的安装目录，输入<br>     redis-cli.exe -h 127.0.0.1 -p 6379<br>    出现如图便连接上了数据库<br>    <img src="/2018/08/30/blog16/5.png" alt="这里写图片描述"><br>    数据库的基本操作见后面的博文，随后更新！</p>
+<hr>
+<p> <strong>五.Redis的可视化工具安装(RedisDesktopManager)</strong><br>     首先下载下来之后双击打开之后出现，如图所示的界面：<br>   <img src="/2018/08/30/blog16/6.png" alt="这里写图片描述"><br>     开始我们创建一个链接，我的配置如图：<br>   <img src="/2018/08/30/blog16/7.png" alt="这里写图片描述"><br>    接下来，就可以用该工具操作Redis了。</p>
+<hr>
+<p>到这里，Redis在Windows上的安装和配置就全部完成了，后续我会出操作Redis数据库的五种数据结构的方法和用Java整合调用Redis的方法。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://struggling-bird.cn/2018/08/30/blog16/" title="Redis的安装和详细配置" target="_blank" rel="external">http://struggling-bird.cn/2018/08/30/blog16/</a>
+    </li>
+    
+    
+      <li class="post-copyright-license">
+        <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+      </li>
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zhaokuankuan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/kaola.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zhaokuankuan" target="_blank"><span class="text-dark">奋斗的小鸟</span><small class="ml-1x">Web Developer &amp; Coder</small></a></h3>
+        <div>愿半生戎码，归来仍为少年！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zODc3OC8xNTMwNg==">
+  <script type="text/javascript">
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+
+          if (typeof LivereTower === 'function') { return; }
+
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+  </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2018/08/23/blog15/" title="Java代码生成平台(Springboot+Mybatis+Swagger)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="collapse2018" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2018">
-        <div class="panel-body">
-          <div class="collection">
-    
-    
-<a href="/2018/08/30/blog16/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-30T06:31:00.000Z" itemprop="datePublished">2018-08-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Redis的安装和详细配置
-</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-  
-    
-    
-    
-<a href="/2018/08/23/blog15/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-23T08:45:16.000Z" itemprop="datePublished">2018-08-23</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java代码生成平台(Springboot+Mybatis+Swagger)
-</a>
 
-
-  
-    
-    
-    
-<a href="/2018/08/16/blog14/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-16T04:31:59.000Z" itemprop="datePublished">2018-08-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Springboot的用法之整合Swagger
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/16/blog13/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-16T04:25:07.000Z" itemprop="datePublished">2018-08-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Springboot的用法之整合Mybatis
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog1/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T10:16:02.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Vue+Webpack+node构建web和App项目
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog10/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 亲测javaWeb的Excel的文件导入
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog3/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 程序员的一首诗
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog2/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 从零开始学习SpringCloud
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog12/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 基于SpringMVC的文件上传
-</a>
-
-
-  
-    
-    
-    
-<a href="/2018/08/11/blog5/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2018-08-11T09:34:31.000Z" itemprop="datePublished">2018-08-11</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Springcloud微服务架构之断路器(Hystrix)
-</a>
-
-
-  
-  
-    </div></div></div></section>
-  
-
-	    </div>
-  	</article>
-  	
-    
-    <nav class="bar bar-footer clearfix" data-stick-bottom>
-        <div class="bar-inner">
-        <div class="pager pull-left">
-            
-            <a class="prev disabled" href="javascript:;"><i class="icon icon-angle-left"></i> 上一页</a>
-            
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/">下一页 <i class="icon icon-angle-right"></i></a>
-            
-        </div>
-        </div>
-        <div class="total-article bar-right">Page 1 of 2</div>
-    </nav>
-    
- 	
 </main>
 
   <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -577,6 +643,13 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     
     
     
+        
+
+
+
+    
+    
+        
     
     
 

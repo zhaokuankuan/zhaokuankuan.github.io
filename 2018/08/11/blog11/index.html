@@ -19,7 +19,7 @@
   
   <title>java后台实现生成二维码并且上传的详细介绍 | 奋斗的小鸟</title>
   <meta name="description" content="今天又遇到了新的问题，就是后台需要生成一个二维码，以前从来没有做过这个二维码，通过上午的努力，总算是完成了，希望有兴趣的可以一起交流学习。我用的是google.zxing的这个插件来完成生成二维码的，还是很方便的。    一.首先需要引入google.zxing的jar包。    我是建的maven工程，因此直接给你上maven的配置，别的可以在网上下载相应的jar包也行。pom.xml配置如下：">
-<meta name="keywords" content="二维码,java,Spring">
+<meta name="keywords" content="Spring,java,二维码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java后台实现生成二维码并且上传的详细介绍">
 <meta property="og:url" content="http://struggling-bird.cn/2018/08/11/blog11/index.html">
@@ -409,7 +409,9 @@
   </span>
 
 
-        
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 
 
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/08/11/blog11/#comments" class="article-comment-link">评论</a></span>
@@ -595,8 +597,10 @@ UUID是我的一个工具类，用来生成随机的编码的，主要是为了�
         &copy; 2018 奋斗的小鸟
         
          <div class="publishby">
-            <span id="busuanzi_container_site_pv">
-                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          <span id="busuanzi_container_site_uv">
+                总访客
+                <span id="busuanzi_value_site_uv"></span>
+                人
             </span>
         </div>
          <div class="publishby">

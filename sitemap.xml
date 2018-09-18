@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://struggling-bird.cn/categories/index.html</loc>
+    
+    <lastmod>2018-09-18T05:38:44.681Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://struggling-bird.cn/2018/08/30/blog16/</loc>
     
     <lastmod>2018-08-30T06:33:42.814Z</lastmod>
@@ -117,13 +124,6 @@
     <loc>http://struggling-bird.cn/about/index.html</loc>
     
     <lastmod>2018-08-11T08:59:34.705Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://struggling-bird.cn/categories/index.html</loc>
-    
-    <lastmod>2018-08-11T08:18:11.434Z</lastmod>
     
   </url>
   

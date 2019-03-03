@@ -3,6 +3,28 @@
 
 
     
+  <url>
+    <loc>http://struggling-bird.cn/2019/03/03/blog17/</loc>
+    <lastmod>2019-03-03T15:20:54.194Z</lastmod>
+    <data>
+        <display>
+        <title>maven多模块应用的搭建和dubbo的整合</title>
+        <pubTime>2019-03-03T06:31:00.000Z</pubTime>
+        
+        <tag>Springboot</tag>
+         
+        <tag>Dubbo</tag>
+         
+         
+           
+             
+              <breadCrumb title="微服务架构" url="http://struggling-bird.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>http://struggling-bird.cn/2018/08/30/blog16/</loc>
@@ -120,13 +142,13 @@
         <title>基于Maven的搭建SSM框架的详细说明</title>
         <pubTime>2018-08-11T09:34:31.000Z</pubTime>
         
+        <tag>java</tag>
+         
         <tag>Spring</tag>
          
         <tag>SpringMvc</tag>
          
         <tag>MyBatis</tag>
-         
-        <tag>java</tag>
          
          
            
@@ -300,11 +322,11 @@
         <title>基于SpringMVC的文件上传</title>
         <pubTime>2018-08-11T09:34:31.000Z</pubTime>
         
+        <tag>java</tag>
+         
         <tag>Spring</tag>
          
         <tag>SpringMvc</tag>
-         
-        <tag>java</tag>
          
          
            
@@ -324,13 +346,13 @@
         <title>亲测javaWeb的Excel的文件导入</title>
         <pubTime>2018-08-11T09:34:31.000Z</pubTime>
         
+        <tag>java</tag>
+         
         <tag>Spring</tag>
          
         <tag>SpringMvc</tag>
          
         <tag>MyBatis</tag>
-         
-        <tag>java</tag>
          
         <tag>POI</tag>
          
@@ -352,11 +374,11 @@
         <title>java后台实现生成二维码并且上传的详细介绍</title>
         <pubTime>2018-08-11T09:34:31.000Z</pubTime>
         
-        <tag>Spring</tag>
+        <tag>二维码</tag>
          
         <tag>java</tag>
          
-        <tag>二维码</tag>
+        <tag>Spring</tag>
          
          
            

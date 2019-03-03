@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  <meta name=referrer content=never>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>maven多模块应用的搭建和dubbo的整合 | 奋斗的小鸟</title>
+  <meta name="description" content="准备环境：ideajdk1.8dubbozookeeperspringboot2.0 一.先新建一个空的父工程 dubbo-application(1).创建一个空的Maven工程作为父Maven工程(2).删除掉父工程里面的src文件夹 只保留pom,如图: 二.依此创建对应的maven的子模块，如图所示(1).选中父工程，右键选择new一个Module (2).直接点击next默认创建出空的M">
+<meta name="keywords" content="Springboot,Dubbo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven多模块应用的搭建和dubbo的整合">
+<meta property="og:url" content="http://struggling-bird.cn/2019/03/03/blog17/index.html">
+<meta property="og:site_name" content="奋斗的小鸟">
+<meta property="og:description" content="准备环境：ideajdk1.8dubbozookeeperspringboot2.0 一.先新建一个空的父工程 dubbo-application(1).创建一个空的Maven工程作为父Maven工程(2).删除掉父工程里面的src文件夹 只保留pom,如图: 二.依此创建对应的maven的子模块，如图所示(1).选中父工程，右键选择new一个Module (2).直接点击next默认创建出空的M">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/1.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/2.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/3.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/4.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/5.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/6.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/7.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/9.png">
+<meta property="og:image" content="http://struggling-bird.cn/2019/03/03/blog17/10.png">
+<meta property="og:updated_time" content="2019-03-03T15:20:54.194Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="maven多模块应用的搭建和dubbo的整合">
+<meta name="twitter:description" content="准备环境：ideajdk1.8dubbozookeeperspringboot2.0 一.先新建一个空的父工程 dubbo-application(1).创建一个空的Maven工程作为父Maven工程(2).删除掉父工程里面的src文件夹 只保留pom,如图: 二.依此创建对应的maven的子模块，如图所示(1).选中父工程，右键选择new一个Module (2).直接点击next默认创建出空的M">
+<meta name="twitter:image" content="http://struggling-bird.cn/2019/03/03/blog17/1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://struggling-bird.cn/2019/03/03/blog17/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="奋斗的小鸟" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  <!-- font-awesome CSS -->
+  <!-- <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+    
+    
+
+</head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/zhaokuankuan" target="_blank">
+          <img class="img-circle img-rotate" src="/images/kaola.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">奋斗的小鸟</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Coder</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Xian, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="http://weibo.com/u/5560716562" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://github.com/zhaokuankuan" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎来到奋斗的小鸟的个人空间！</br> <a href="https://blog.csdn.net/zhaokk_git">csdn博客</a></br> <a href="https://github.com/zhaokuankuan">Github仓库地址</a> </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaWeb/">JavaWeb</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web前端/">Web前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javaWeb/">javaWeb</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂谈/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dubbo/">Dubbo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node/">Node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/POI/">POI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringMvc/">SpringMvc</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Springboot/">Springboot</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swagger/">Swagger</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">16</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2019/03/03/blog17/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/微服务架构/">微服务架构</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/03/03/blog17/" class="title">maven多模块应用的搭建和dubbo的整合</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-03-03T06:31:00.000Z" itemprop="datePublished">2019-03-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/30/blog16/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/java/">java</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/30/blog16/" class="title">Redis的安装和详细配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-30T06:31:00.000Z" itemprop="datePublished">2018-08-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/23/blog15/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/23/blog15/" class="title">Java代码生成平台(Springboot+Mybatis+Swagger)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-23T08:45:16.000Z" itemprop="datePublished">2018-08-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/16/blog14/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/JavaWeb/">JavaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/16/blog14/" class="title">Springboot的用法之整合Swagger</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-16T04:31:59.000Z" itemprop="datePublished">2018-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <!--<div class="item-thumb">-->
+              <!--<a href="/2018/08/16/blog13/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+-->
+            <!--</div>-->
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/javaWeb/">javaWeb</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/16/blog13/" class="title">Springboot的用法之整合Mybatis</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-16T04:25:07.000Z" itemprop="datePublished">2018-08-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-blog17" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      maven多模块应用的搭建和dubbo的整合
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/03/blog17/" class="article-date">
+	  <time datetime="2019-03-03T06:31:00.000Z" itemprop="datePublished">2019-03-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/微服务架构/">微服务架构</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Dubbo/">Dubbo</a>, <a class="article-tag-link" href="/tags/Springboot/">Springboot</a>
+  </span>
+
+
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/03/blog17/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1,925(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 10(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry markdown-body" itemprop="articleBody">
+      
+        <p><strong>准备环境</strong>：<br>idea<br>jdk1.8<br>dubbo<br>zookeeper<br>springboot2.0</p>
+<p><strong>一.先新建一个空的父工程 dubbo-application</strong><br>(1).创建一个空的Maven工程作为父Maven工程<br>(2).删除掉父工程里面的src文件夹 只保留pom,如图:<br><img src="/2019/03/03/blog17/1.png" alt="在这里插入图片描述"></p>
+<p><strong>二.依此创建对应的maven的子模块，如图所示</strong><br>(1).选中父工程，右键选择new一个Module<br><img src="/2019/03/03/blog17/2.png" alt="在这里插入图片描述"></p>
+<p>(2).直接点击next默认创建出空的Maven子模块<br><img src="/2019/03/03/blog17/3.png" alt="在这里插入图片描述"></p>
+<p>(3).然后填写子模块的信息,如图:<br><img src="/2019/03/03/blog17/4.png" alt="在这里插入图片描述"><br>然后点击next，完善Module的信息，然后点击Finish。<br><img src="/2019/03/03/blog17/5.png" alt="在这里插入图片描述"><br>(4).如图便创建好了controller子模块，接下来我们一次创建别的子模块和子模块下的包结构：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">controller    工程的接口层                  com<span class="selector-class">.kk</span><span class="selector-class">.controller</span>        </span><br><span class="line">service       工程的服务层                  com<span class="selector-class">.kk</span><span class="selector-class">.service</span></span><br><span class="line">api           外部暴露的接口                com<span class="selector-class">.kk</span><span class="selector-class">.api</span></span><br><span class="line">rpc           注册到zk中提供服务的工程       com<span class="selector-class">.kk</span><span class="selector-class">.rpc</span></span><br><span class="line">dao           dao层，即数据库的连接层        com<span class="selector-class">.kk</span><span class="selector-class">.dao</span></span><br><span class="line">common        公共的组建和文件配置           com<span class="selector-class">.kk</span><span class="selector-class">.common</span></span><br><span class="line">domain        实体类所在的层                com<span class="selector-class">.kk</span><span class="selector-class">.domain</span></span><br></pre></td></tr></table></figure>
+<p>创建完成之后如图所示：<br><img src="/2019/03/03/blog17/6.png" alt="在这里插入图片描述"><br>到此，项目的目录的创建就完成了。<br><strong>(三).接下来进行工程的配置</strong><br>因为是springboot整合dubbo进行分布式调用，这里就需要将rpc和controller分别作为服务的提供者和服务的调用者发布出去。<br>(1).首先,在父工程的pom包中引入项目中需要用到的依赖包，代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line">&lt;project xmlns=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span><br><span class="line">         xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">         xsi:schemaLocation=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span><br><span class="line">    &lt;modelVersion&gt;<span class="number">4.0</span>.<span class="number">0</span>&lt;/modelVersion&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;groupId&gt;com.kk&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;Dubbo-Application&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">    &lt;version&gt;<span class="number">1.0</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;modules&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-controller&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-service&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-api&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-common&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-domain&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-dao&lt;/module&gt;</span><br><span class="line">        &lt;module&gt;dubbo-application-rpc&lt;/module&gt;</span><br><span class="line">    &lt;/modules&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;springBoot.version&gt;<span class="number">2.0</span>.<span class="number">4</span>.RELEASE&lt;/springBoot.version&gt;</span><br><span class="line">        &lt;lombok.version&gt;<span class="number">1.16</span>.<span class="number">22</span>&lt;/lombok.version&gt;</span><br><span class="line">        &lt;spring.mybatis&gt;<span class="number">1.3</span>.<span class="number">1</span>&lt;/spring.mybatis&gt;</span><br><span class="line">        &lt;mysql&gt;<span class="number">5.1</span>.<span class="number">25</span>&lt;/mysql&gt;</span><br><span class="line">        &lt;mysql.druid&gt;<span class="number">0.2</span>.<span class="number">23</span>&lt;/mysql.druid&gt;</span><br><span class="line">        &lt;swagger.version&gt;<span class="number">2.6</span>.<span class="number">1</span>&lt;/swagger.version&gt;</span><br><span class="line">        &lt;fastjson.version&gt;<span class="number">1.2</span>.<span class="number">46</span>&lt;/fastjson.version&gt;</span><br><span class="line">        &lt;common<span class="selector-class">.lange</span><span class="selector-class">.version</span>&gt;<span class="number">3.8</span>.<span class="number">1</span>&lt;/common<span class="selector-class">.lange</span><span class="selector-class">.version</span>&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;<span class="number">2.0</span>.<span class="number">4</span>.RELEASE&lt;/version&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!--spring-boot-starter-dubbo--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com<span class="selector-class">.gitee</span><span class="selector-class">.reger</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-dubbo&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;<span class="number">1.1</span>.<span class="number">2</span>&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--lombok的版本号管理--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;lombok.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--spring的核心包--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;springBoot.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;springBoot.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;springBoot.version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;springBoot.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.mybatis</span><span class="selector-class">.spring</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;spring.mybatis&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--数据库和链接池--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;mysql&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;mysql.druid&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--swagger依赖文件--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;swagger.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;swagger.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--redis的依赖包--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.springframework</span><span class="selector-class">.boot</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;!--工具包--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;fastjson.version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org<span class="selector-class">.apache</span><span class="selector-class">.commons</span>&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;commons-lang3&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;common<span class="selector-class">.lange</span><span class="selector-class">.version</span>&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"></span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<p>(2).因为刚开始创建子模块的时候都是创建的空的子Maven模块，因为我们应该对controller和rpc进行改造为Springboot工程。<br>分别创建ControllerApplication和RpcApplication两个启动类,和application.yml文件配置如下：<br>ControllerApplication.java</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 启动类</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/14 17:43</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@ComponentScan(basePackages = &#123;<span class="string">"com.kk.*"</span>&#125;)</span><br><span class="line">public class ControllerApplication &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(ControllerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>application.yml</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: <span class="number">8761</span></span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /dubbo-controller</span><br></pre></td></tr></table></figure>
+<p>在controller包中，编写一个测试用例TestController.java，并且启动工程运行，再浏览器输入</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.controller;</span><br><span class="line"></span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试的类</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/14 18:07</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(<span class="string">"/test"</span>)</span><br><span class="line">    public String test()&#123;</span><br><span class="line">        return "test is ok";</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>出现如下的结果，证明controller和rpc两个子模块已经完成。<br><img src="/2019/03/03/blog17/7.png" alt="在这里插入图片描述"></p>
+<p><strong>四.接下来进行dubbo的整合,在这之前你需要先搭建好zookeeper，后续会出一篇关于zookeeper的搭建。</strong><br>(1).dubbo的包我在pom中已经引入了，支持最新的boot2.0<br>先配置controller的application.yml</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">   port: <span class="number">8761</span></span><br><span class="line">   servlet:</span><br><span class="line">     context-path: /dubbo-controller</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  dubbo:</span><br><span class="line">    scan:</span><br><span class="line">      base-packages: com<span class="selector-class">.kk</span><span class="selector-class">.controller</span></span><br><span class="line">    application:</span><br><span class="line">      id: dubbo-controller</span><br><span class="line">      name: dubbo-controller</span><br><span class="line">    protocol:</span><br><span class="line">      id: dubbo</span><br><span class="line">      name: dubbo</span><br><span class="line">    registry:</span><br><span class="line">      <span class="selector-tag">address</span>: zookeeper:<span class="comment">//zkserver:2181</span></span><br><span class="line">    consumer:</span><br><span class="line">      timeout: <span class="number">5000</span></span><br><span class="line">      check: true         # 服务启动时检查被调用服务是否可用</span><br><span class="line">      retries: <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>(2). 在配置rpc的application.yml</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: <span class="number">8762</span></span><br><span class="line">  servlet:</span><br><span class="line">    context-path: /dubbo-rpc</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  dubbo:</span><br><span class="line">    scan:</span><br><span class="line">      base-packages: com<span class="selector-class">.kk</span><span class="selector-class">.rpc</span></span><br><span class="line">    application:</span><br><span class="line">      id: dubbo-rpc</span><br><span class="line">      name: dubbo-rpc</span><br><span class="line">    protocol:</span><br><span class="line">      id: dubbo</span><br><span class="line">      name: dubbo</span><br><span class="line">    registry:</span><br><span class="line">      <span class="selector-tag">address</span>: zookeeper:<span class="comment">//zkserver:2181</span></span><br><span class="line">    consumer:</span><br><span class="line">      timeout: <span class="number">5000</span></span><br><span class="line">      check: true      # 服务启动时检查被调用服务是否可用</span><br></pre></td></tr></table></figure>
+<p><strong>五.基本上的配置就已经完成了，接下来测试一下！</strong><br>(1).先编写一个api的接口，代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.api;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/15 16:13</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public interface TestService &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 调用本地测试接口</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public String TestLocalServer(String str);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 调用rpc测试接口</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    public String TestRpcServer(String str);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(2).编写Rpc服务和本地自身调用的Service的实现类：<br> 本地：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.service;</span><br><span class="line"></span><br><span class="line">import com.kk.api.TestService;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/15 16:35</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@Service</span><br><span class="line">public class TestServiceImpl implements TestService&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用本地测试接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @Override</span><br><span class="line">    public String TestLocalServer(String str) &#123;</span><br><span class="line">        return "local server" + str;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用rpc测试接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @Override</span><br><span class="line">    public String TestRpcServer(String str) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>rpc：这里需要注意下，因为框架对dubbo的二次封装这边不能使用Dubbo的service发布服务，改用@Export<br>package com.kk.rpc;</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import com.kk.api.TestService;</span><br><span class="line">import com.reger.dubbo.annotation.Export;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/15 16:35</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@Export</span><br><span class="line">public class TestServiceImpl implements TestService&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用本地测试接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @Override</span><br><span class="line">    public String TestLocalServer(String str) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用rpc测试接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param str</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    @Override</span><br><span class="line">    public String TestRpcServer(String str) &#123;</span><br><span class="line">        return "rpc server" + str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(3).编写Controller的调用，这里可以用@Reference,也可以用@Inject，代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package com.kk.controller;</span><br><span class="line"></span><br><span class="line">import com.alibaba.dubbo.config.annotation.Reference;</span><br><span class="line">import com.kk.api.TestService;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试的类</span></span><br><span class="line"><span class="comment"> * @author :Mr.kk</span></span><br><span class="line"><span class="comment"> * @date: 2019/2/14 18:07</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@RestController</span><br><span class="line">public class TestController &#123;</span><br><span class="line"></span><br><span class="line">    @Reference</span><br><span class="line">    private TestService testService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(<span class="string">"/test"</span>)</span><br><span class="line">    public String test()&#123;</span><br><span class="line">        return "test is ok";</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(<span class="string">"/testRpc"</span>)</span><br><span class="line">    public String testRpc()&#123;</span><br><span class="line">        return testService.TestRpcServer(new Date().toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(4).然后分别启动Rpc和Controller的启动类，可以在Dubbo的监控台看到，即表示成功，f发布到zookeeper成功<br><img src="/2019/03/03/blog17/9.png" alt="在这里插入图片描述"></p>
+<p>在浏览器输入，显示：<br><img src="/2019/03/03/blog17/10.png" alt="在这里插入图片描述"></p>
+<p><strong>到此整合完成,附上代码地址  <a href="https://github.com/zhaokuankuan/Dubbo-Application" target="_blank" rel="noopener">github</a></strong></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://struggling-bird.cn/2019/03/03/blog17/" title="maven多模块应用的搭建和dubbo的整合" target="_blank" rel="external">http://struggling-bird.cn/2019/03/03/blog17/</a>
+    </li>
+    
+    
+      <li class="post-copyright-license">
+        <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+      </li>
+    
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/zhaokuankuan" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/kaola.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/zhaokuankuan" target="_blank"><span class="text-dark">奋斗的小鸟</span><small class="ml-1x">Web Developer &amp; Coder</small></a></h3>
+        <div>愿半生戎码，归来仍为少年！</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+      <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zODc3OC8xNTMwNg==">
+  <script type="text/javascript">
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+
+          if (typeof LivereTower === 'function') { return; }
+
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+  </script>
+  <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2018/08/30/blog16/" title="Redis的安装和详细配置"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,qzone,wechat,tencent,douban,diandian,facebook,twitter,google,linkedin" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="http://weibo.com/u/5560716562" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://github.com/zhaokuankuan" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2019 奋斗的小鸟
+        
+         <div class="publishby">
+          <span id="busuanzi_container_site_uv">
+                总访客
+                <span id="busuanzi_value_site_uv"></span>
+                人
+            </span>
+        </div>
+         <div class="publishby">
+            Power By <a href="https://github.com/zhaokuankuan" target="_blank">zhaokk</a> base on pure
+        </div>
+         陕ICP备18014169号-1
+    </div>
+</footer>
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script src="/js/plugin.min.js"></script>
+<script src="/js/application.js"></script>
+  
+    
+    
+    
+        <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+    
+    
+        
+
+
+
+    
+    
+        
+    
+    
+
+    <script defer>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?6759adeabc072e4a92c5e3fda98880b2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+</body>
+</html>
